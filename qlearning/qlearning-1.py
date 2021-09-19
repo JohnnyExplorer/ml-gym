@@ -13,7 +13,7 @@ SIZE = 20
 MAX_MOVE = 1000
 
 HM_EPISODES = 50000
-SHOW_EVERY = 10000  # how often to play through env visually.
+SHOW_EVERY = 100  # how often to play through env visually.
 
 MOVE_PENALTY = 5
 ENEMY_PENALTY = 300
@@ -22,8 +22,8 @@ FOOD_REWARD = 25
 epsilon = 0
 EPS_DECAY = 0.9998  # Every episode will be epsilon*EPS_DECAY
 
-start_q_table = 'qtable-1631493652.pickle' # None or Filename
-#start_q_table = None
+#start_q_table = 'qtable-1631493652.pickle' # None or Filename
+start_q_table = None
 LEARNING_RATE = 0.1
 DISCOUNT = 0.95
 
@@ -52,14 +52,28 @@ class Blob:
         '''
         Gives us 4 total movement options. (0,1,2,3)
         '''
-        if choice == 0:
-            self.move(x=1, y=1)
-        elif choice == 1:
+
+        if choice ==  0:
             self.move(x=-1, y=-1)
-        elif choice == 2:
-            self.move(x=-1, y=1)
-        elif choice == 3:
+        elif choice ==  1:
+            self.move(x=0, y=-1)
+        elif choice ==  2:
             self.move(x=1, y=-1)
+        elif choice ==  3:
+            self.move(x=-1, y=0)
+        elif choice ==  4:
+            self.move(x=0, y=0)
+        elif choice ==  5:
+            self.move(x=1, y=0)
+        elif choice ==  6:
+            self.move(x=-1, y=1)
+        elif choice ==  7:
+            self.move(x=0, y=1)
+        elif choice ==  8:
+            self.move(x=1, y=1)
+
+
+        
 
     def move(self, x=False, y=False):
 
@@ -92,14 +106,20 @@ if start_q_table is None:
     # initialize the q-table#
     q_table = {}
     for i in range(-SIZE+1, SIZE):
+        print('i', i)
         for ii in range(-SIZE+1, SIZE):
+            print('ii', ii)
             for iii in range(-SIZE+1, SIZE):
-                    for iiii in range(-SIZE+1, SIZE):
-                        q_table[((i, ii), (iii, iiii))] = [np.random.uniform(-5, 0) for i in range(4)]
+                print('iii', iii)
+                for iiii in range(-SIZE+1, SIZE):
+                    print('iiii', iiii)
+                    q_table[((i, ii), (iii, iiii))] = [np.random.uniform(-5, 0) for i in range(8)]
     print('make q table..done')
 else:
     with open(start_q_table, "rb") as f:
         q_table = pickle.load(f)
+
+
 
 
 # can look up from Q-table with: print(q_table[((-9, -2), (3, 9))]) for example
@@ -125,7 +145,7 @@ for episode in range(HM_EPISODES):
             # GET THE ACTION
             action = np.argmax(q_table[obs])
         else:
-            action = np.random.randint(0, 4)
+            action = np.random.randint(0, 8)
         # Take the action!
         player.action(action)
 
