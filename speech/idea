@@ -1,0 +1,28 @@
+Whats up!
+  -ai to fetch news and summarize what's going on in a very simple way. Shows subjects and sentiment
+
+find text
+  find subjects (subject model)
+  find sentiment (sentiment model)
+
+
+if text get too big
+  by paragraph (pipe line)
+    find subjects
+    find sentiment
+
+    assemble paragraph
+      -weight subjects 
+        -primary secondary subjects 
+      -weight sentiment based on subject weights
+
+
+
+scrappers
+  -per site articles
+  -reddit post
+  -twitter
+  
+
+types of sentiment
+  -general (for now)
