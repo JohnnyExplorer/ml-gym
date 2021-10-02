@@ -1,2 +1,6 @@
 pandas/course-files
 *.pickle
+tensorflow/getting-started-tensorflow-20/
+tensorflow/seq_logs/
+tensorflow/logs/
+*/.ipynb_checkpoints/*
